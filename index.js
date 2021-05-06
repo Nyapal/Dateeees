@@ -41,17 +41,50 @@ class D {
     get secs() {
         return this._date.getSeconds()
     }
+    format(d=0) {
+        // let rep = {D: 'getDay()', M: 'getMonth()', Y: 'getFullYear()' }
+        // let output = ''
+        // // let d, m, y, h, i, s }
+        // for(let i = 0; i < f.length; i++) {
+        //     if (f[i] in rep) {
+        //         let val = rep[f[i]]
+        //         console.log(val.splice(1, val.length))
+        //         // let idk = this._date.${val}
+        //         // console.log(idk)
+        //     } else {
+        //         console.log('no', f[i])
+        //     }
+        // }
+        // come back to me :) 
+    }
+    when() {
+        let today = new Date()
+
+        if (today < this._date) {
+            console.log('future')
+        } else {
+            console.log('past')
+        }
+
+
+        // console.log(today)
+        console.log(today.getDate(today - this._date))
+        // console.log(today.getDate - this._date)
+        // let difference = today - this._date 
+
+        // console.log(difference)
+        // console.log(today)
+        // return when the date will occur 
+    }
 }
 
-const d = new D()
-
-console.log( d.year )  // 2021 - Full year
-console.log( d.yr )    // 21   - Short year
-console.log( d.month ) // July - Full month
-console.log( d.mon )   // Jul  - Short month
-console.log( d.day )   // Tuesday - Full day
-console.log( d.dy )    // Tue  - Short day
-console.log( d.date )  // 27   - Date
-console.log( d.hours ) // 18   - Hour
-console.log( d.mins )  // 6    - Minutes
-console.log( d.secs )  // 5    - Seconds
+const d = new D(2019, 0, 2, 3, 4, 5)
+console.log(d.when()) // 6 months ago
+// const d = new D(2019, 9, 2, 3, 4, 5)
+// console.log(d.when()) // 3 months from now
+// const d = new D(2024, 9, 2, 3, 4, 5)
+// console.log(d.when()) // 5 years from now
+// const d = new D(2019, 6, 30, 3, 4, 5)
+// console.log(d.when()) // 3 days from now
+// const d = new D()
+// console.log(d.when()) // today
