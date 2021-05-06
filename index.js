@@ -59,32 +59,37 @@ class D {
     }
     when() {
         let today = new Date()
+        console.log('2day', today)
 
-        if (today < this._date) {
-            console.log('future')
+        const difference= Math.abs(today - this._date);
+        if (difference == 0) {
+            return 'today'
+        }
+        let numDays = Math.ceil(difference / (1000 * 60 * 60 * 24)); 
+
+        if (numDays < 30) {
+            numDays = `numDays days`
+        } else if (numDays < 364) {
+            numDays = `${Math.ceil(numDays / 30)} months`
         } else {
-            console.log('past')
+            numDays = `${Math.ceil(numDays / 365)} years`
         }
 
-
-        // console.log(today)
-        console.log(today.getDate(today - this._date))
-        // console.log(today.getDate - this._date)
-        // let difference = today - this._date 
-
-        // console.log(difference)
-        // console.log(today)
-        // return when the date will occur 
+        if (today < this._date) {
+            return `${numDays} from now`
+        } else {
+            return `${numDays} ago`
+        }
     }
 }
 
-const d = new D(2019, 0, 2, 3, 4, 5)
-console.log(d.when()) // 6 months ago
+// const d = new D(2019, 0, 2, 3, 4, 5)
+// console.log(d.when()) // 6 months ago
 // const d = new D(2019, 9, 2, 3, 4, 5)
 // console.log(d.when()) // 3 months from now
 // const d = new D(2024, 9, 2, 3, 4, 5)
 // console.log(d.when()) // 5 years from now
 // const d = new D(2019, 6, 30, 3, 4, 5)
 // console.log(d.when()) // 3 days from now
-// const d = new D()
-// console.log(d.when()) // today
+const d = new D()
+console.log(d.when()) // today
