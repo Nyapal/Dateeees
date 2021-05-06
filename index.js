@@ -41,21 +41,65 @@ class D {
     get secs() {
         return this._date.getSeconds()
     }
-    format(d=0) {
-        // let rep = {D: 'getDay()', M: 'getMonth()', Y: 'getFullYear()' }
-        // let output = ''
-        // // let d, m, y, h, i, s }
-        // for(let i = 0; i < f.length; i++) {
-        //     if (f[i] in rep) {
-        //         let val = rep[f[i]]
-        //         console.log(val.splice(1, val.length))
-        //         // let idk = this._date.${val}
-        //         // console.log(idk)
-        //     } else {
-        //         console.log('no', f[i])
-        //     }
-        // }
-        // come back to me :) 
+    format(f=0) {
+        let arr
+        if (f == 0) {
+            let year = this._date.getFullYear()
+            let month = this._date.getMonth()
+            let day = this._date.getDay()
+            if (day < 10) {
+                day = `0${day}`
+            }
+            return `${year} ${months[month]} ${day}`
+        } else {
+            arr = f.split('')
+        }
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i]  === 'Y') {
+                arr[i] = this._date.getFullYear()
+            }
+            if (arr[i]  === 'y') {
+                let shortYr = this._date.getYear().toString()
+                arr[i] = shortYr.slice(1, shortYr.length)
+            }
+            if (arr[i]  === 'M') {
+                let mon = this._date.getMonth() 
+                arr[i] = months[mon]
+            }
+            if (arr[i]  === 'm') {
+                let mon = this._date.getMonth()
+                arr[i] = mons[mon]
+            }
+            if (arr[i]  === 'D') {
+                let day = this._date.getDay() + 1
+                if (day < 10) {
+                    day = `0${day}`
+                }
+                arr[i] = day
+            }
+            if (arr[i]  === 'd') {
+                arr[i] = this._date.getDay() + 1
+            }
+            if (arr[i]  === 'H') {
+                arr[i] = '0' + this._date.getHours()
+            }
+            if (arr[i]  === 'h') {
+                arr[i] = this._date.getHours()
+            }
+            if (arr[i]  === 'I') {
+                arr[i] = '0' + this._date.getMinutes()
+            }
+            if (arr[i]  === 'i') {
+                arr[i] = this._date.getMinutes()
+            }
+            if (arr[i]  === 'S') {
+                arr[i] = '0' + this._date.getSeconds()
+            }
+            if (arr[i]  === 's') {
+                arr[i] = this._date.getSeconds()
+            }
+        }
+        return arr.join('')
     }
     when() {
         let today = new Date()
@@ -81,15 +125,4 @@ class D {
             return `${numDays} ago`
         }
     }
-}
-
-// const d = new D(2019, 0, 2, 3, 4, 5)
-// console.log(d.when()) // 6 months ago
-// const d = new D(2019, 9, 2, 3, 4, 5)
-// console.log(d.when()) // 3 months from now
-// const d = new D(2024, 9, 2, 3, 4, 5)
-// console.log(d.when()) // 5 years from now
-// const d = new D(2019, 6, 30, 3, 4, 5)
-// console.log(d.when()) // 3 days from now
-const d = new D()
-console.log(d.when()) // today
+} 
